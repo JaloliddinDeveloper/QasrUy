@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using QasrUy.Api.Brokers.Storages;
 
-#nullable disable
 
 namespace QasrUy.Api.Migrations
 {
