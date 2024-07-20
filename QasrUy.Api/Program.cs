@@ -1,3 +1,5 @@
+using QasrUy.Api.Brokers.Storages;
+
 public class Program
 {
     private static void Main(string[] args)
@@ -7,6 +9,7 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddTransient<IStorageBroker, StorageBroker>();
 
         var app = builder.Build();
 
