@@ -9,7 +9,7 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        builder.Services.AddTransient<IStorageBroker, StorageBroker>();
+        BrokersMethod(builder);
 
         var app = builder.Build();
 
@@ -26,5 +26,10 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+
+    private static void BrokersMethod(WebApplicationBuilder builder)
+    {
+        builder.Services.AddTransient<IStorageBroker, StorageBroker>();
     }
 }

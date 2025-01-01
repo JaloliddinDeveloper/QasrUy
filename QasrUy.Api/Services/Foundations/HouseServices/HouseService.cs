@@ -7,11 +7,9 @@ namespace QasrUy.Api.Services.Foundations.HouseServices
     {
         private readonly IStorageBroker storageBroker;
 
-        public HouseService(IStorageBroker storageBroker)
-        {
+        public HouseService(IStorageBroker storageBroker)=>
             this.storageBroker = storageBroker;
-        }
-
+        
         public async ValueTask<House> AddHouseAsync(House house)=>
             await this.storageBroker.InsertHouseAsync(house);
 
