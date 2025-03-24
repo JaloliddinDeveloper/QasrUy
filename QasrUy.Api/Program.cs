@@ -1,5 +1,5 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using QasrUy.Api.Brokers.Storages;
-using QasrUy.Api.Models;
 using QasrUy.Api.Services.Foundations.HouseServices;
 using QasrUy.Api.Services.Foundations.PictureServices;
 
@@ -13,22 +13,34 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddSwaggerGen(c =>
-        {
-            c.SchemaFilter<IgnorePropertySchemaFilter>();
-        });
-
         BrokersMethod(builder);
         FoundationsMethods(builder);
 
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowAll", policy =>
+            {
+                policy.AllowAnyOrigin()
+                      .AllowAnyMethod()
+                      .AllowAnyHeader();
+            });
+        });
         var app = builder.Build();
 
-        if (app.Environment.IsDevelopment())
+        app.UseStaticFiles();
+
+        app.UseCors("AllowAll");
+
+        if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseStaticFiles();
+
+        app.UseForwardedHeaders(new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        });
 
         app.UseHttpsRedirection();
 
