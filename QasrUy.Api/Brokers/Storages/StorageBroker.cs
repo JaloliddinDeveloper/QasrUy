@@ -12,11 +12,22 @@ namespace QasrUy.Api.Brokers.Storages
             Database.Migrate();
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+
+            string connection =
+                this.configuration.GetConnectionString("DefaultConnection");
+
+            optionsBuilder.UseMySql(connection,
+                ServerVersion.AutoDetect(connection));
+        }
+
         private async ValueTask<T> InsertAsync<T>(T @object) where T : class
         {
             using var broker = new StorageBroker(this.configuration);
             broker.Entry<T>(@object).State = EntityState.Added;
             await broker.SaveChangesAsync();
+
             return @object;
         }
 
@@ -50,13 +61,6 @@ namespace QasrUy.Api.Brokers.Storages
             await broker.SaveChangesAsync();
 
             return @object;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            string connectionString =
-             this.configuration.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlServer(connectionString);
         }
 
         public override void Dispose() { }

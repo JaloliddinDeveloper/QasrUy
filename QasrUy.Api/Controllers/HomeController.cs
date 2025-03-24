@@ -4,7 +4,7 @@ using RESTFulSense.Controllers;
 namespace QasrUy.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class HomeController : RESTFulController
     {
         [HttpGet]

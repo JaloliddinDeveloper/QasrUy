@@ -1,4 +1,7 @@
 using QasrUy.Api.Brokers.Storages;
+using QasrUy.Api.Models;
+using QasrUy.Api.Services.Foundations.HouseServices;
+using QasrUy.Api.Services.Foundations.PictureServices;
 
 public class Program
 {
@@ -9,7 +12,14 @@ public class Program
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+
+        builder.Services.AddSwaggerGen(c =>
+        {
+            c.SchemaFilter<IgnorePropertySchemaFilter>();
+        });
+
         BrokersMethod(builder);
+        FoundationsMethods(builder);
 
         var app = builder.Build();
 
@@ -18,6 +28,7 @@ public class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+        app.UseStaticFiles();
 
         app.UseHttpsRedirection();
 
@@ -26,6 +37,12 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+
+    private static void FoundationsMethods(WebApplicationBuilder builder)
+    {
+        builder.Services.AddTransient<IHouseService, HouseService>();
+        builder.Services.AddTransient<IPictureService, PictureService>();
     }
 
     private static void BrokersMethod(WebApplicationBuilder builder)
