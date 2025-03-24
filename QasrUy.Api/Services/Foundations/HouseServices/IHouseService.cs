@@ -8,6 +8,6 @@ namespace QasrUy.Api.Services.Foundations.HouseServices
         IQueryable<House> RetrieveAllHouses();
         ValueTask<House> RetrieveHouseByIdAsync(int houseId);
         ValueTask<House> ModifyHouseAsync(House house);
-        ValueTask<House> RemoveHouseAsync(House house); 
+        ValueTask<House> RemoveHouseAsync(int houseID); 
     }
 }

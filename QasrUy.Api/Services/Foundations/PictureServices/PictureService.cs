@@ -24,7 +24,12 @@ namespace QasrUy.Api.Services.Foundations.PictureServices
         public async ValueTask<Picture> ModifyPictureAsync(Picture picture) =>
             await this.storageBroker.UpdatePictureAsync(picture);
       
-        public async ValueTask<Picture> RemovePictureAsync(Picture picture)=>
-            await this.storageBroker.DeletePictureAsync(picture);
+        public async ValueTask<Picture> RemovePictureAsync(int pictureId)
+        {
+            Picture picture =
+                await this.storageBroker.SelectByIdPictureAsync(pictureId);
+
+            return await this.storageBroker.DeletePictureAsync(picture);
+        }
     }
 }

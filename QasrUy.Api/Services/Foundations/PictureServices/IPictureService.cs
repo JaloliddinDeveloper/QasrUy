@@ -8,6 +8,6 @@ namespace QasrUy.Api.Services.Foundations.PictureServices
         IQueryable<Picture> RetrieveAllPictures();
         ValueTask<Picture> RetrievePictureByIdAsync(int pictureId);
         ValueTask<Picture> ModifyPictureAsync(Picture picture);
-        ValueTask<Picture> RemovePictureAsync(Picture picture);
+        ValueTask<Picture> RemovePictureAsync(int pictureId);
     }
 }
