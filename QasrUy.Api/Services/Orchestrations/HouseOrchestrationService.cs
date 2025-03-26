@@ -28,7 +28,7 @@ namespace QasrUy.Api.Services.Orchestrations
             var groupStudents = groups.Select(group => new HousePicture
             {
                 House = group,
-                Pictures = students.Where(student => student.Id == group.Id).ToList()
+                Pictures = students.Where(student => student.HouseId == group.Id).ToList()
             });
 
             return groupStudents.AsQueryable();
