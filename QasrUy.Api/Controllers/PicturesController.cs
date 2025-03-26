@@ -14,7 +14,7 @@ namespace QasrUy.Api.Controllers
         private readonly IPictureService pictureService;
 
         private readonly string uploadsFolder = "/var/www/files";
-        private readonly string baseUrl = "http://35.184.108.124";
+        private readonly string baseUrl = "http://34.31.132.45";
 
         public PicturesController(
             IStorageBroker storageBroker,
