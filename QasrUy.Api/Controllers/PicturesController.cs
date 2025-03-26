@@ -10,17 +10,14 @@ namespace QasrUy.Api.Controllers
     [Route("[controller]")]
     public class PicturesController : RESTFulController
     {
-        private readonly IStorageBroker storageBroker;
         private readonly IPictureService pictureService;
 
         private readonly string uploadsFolder = "/var/www/files";
         private readonly string baseUrl = "http://34.31.132.45";
 
         public PicturesController(
-            IStorageBroker storageBroker,
             IPictureService pictureService)
         {
-            this.storageBroker = storageBroker;
             this.pictureService = pictureService;
         }
 

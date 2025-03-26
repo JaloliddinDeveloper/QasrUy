@@ -2,8 +2,8 @@
 {
     public class Picture
     {
-        public Guid Id { get; set; }= Guid.NewGuid();
+        public int Id { get; set; }
         public string PictureUrl { get; set; }
-        public Guid HouseId { get; set; }    
+        public int HouseId { get; set; }    
     }
 }
