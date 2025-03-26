@@ -26,7 +26,7 @@ namespace QasrUy.Api.Controllers
         }
 
         [HttpPost]
-        public async ValueTask<ActionResult<House>> PostHouseAsync(House house)
+        public async ValueTask<ActionResult<House>> PostHouseAsync([FromForm] House house)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace QasrUy.Api.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpGet("HouseWithPictures")]
         public ActionResult<IQueryable<HousePicture>> GetAllHousesWithPictures()
         {
             try
