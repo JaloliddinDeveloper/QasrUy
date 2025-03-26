@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using QasrUy.Api.Brokers.Storages;
 using QasrUy.Api.Services.Foundations.HouseServices;
 using QasrUy.Api.Services.Foundations.PictureServices;
+using QasrUy.Api.Services.Orchestrations;
 
 public class Program
 {
@@ -15,6 +16,8 @@ public class Program
 
         BrokersMethod(builder);
         FoundationsMethods(builder);
+        OrchestrationsMethods(builder);
+
 
         builder.Services.AddCors(options =>
         {
@@ -49,6 +52,11 @@ public class Program
         app.MapControllers();
 
         app.Run();
+    }
+
+    private static void OrchestrationsMethods(WebApplicationBuilder builder)
+    {
+        builder.Services.AddTransient<IHouseOrchestrationService, HouseOrchestrationService>();
     }
 
     private static void FoundationsMethods(WebApplicationBuilder builder)
