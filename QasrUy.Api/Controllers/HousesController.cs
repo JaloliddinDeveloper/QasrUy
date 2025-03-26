@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QasrUy.Api.Models.Houses;
+using QasrUy.Api.Models.Orchestrations;
 using QasrUy.Api.Services.Foundations.HouseServices;
+using QasrUy.Api.Services.Orchestrations;
 using RESTFulSense.Controllers;
 
 namespace QasrUy.Api.Controllers
@@ -10,10 +12,17 @@ namespace QasrUy.Api.Controllers
     public class HousesController : RESTFulController
     {
         private readonly IHouseService houseService;
+        private readonly IHouseOrchestrationService 
+            houseOrchestrationService;
 
-        public HousesController(IHouseService houseService)
+        public HousesController(
+            IHouseService houseService,
+            IHouseOrchestrationService 
+                houseOrchestrationService)
         {
             this.houseService = houseService;
+            this.houseOrchestrationService = 
+                houseOrchestrationService;
         }
 
         [HttpPost]
@@ -33,13 +42,13 @@ namespace QasrUy.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IQueryable<House>> GetAllHouses()
+        public ActionResult<IQueryable<HousePicture>> GetAllHousesWithPictures()
         {
             try
             {
-                IQueryable<House> allHouses = this.houseService.RetrieveAllHouses();
+                IQueryable<HousePicture> allHouseswithPictures = this.houseOrchestrationService.ProcessHouseWithPicturesAsync();
 
-                return Ok(allHouses);
+                return Ok(allHouseswithPictures);
             }
             catch (Exception ex)
             {
