@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QasrUy.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class OneMigration : Migration
+    public partial class Four : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
